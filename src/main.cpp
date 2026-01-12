@@ -1,9 +1,13 @@
 #include <iostream>
-#include "domain/Profile.hpp"
+#include "service/ProfileStore.hpp"
 #include "cli/Menu.hpp"
 
 int main()
 {
-    std::cout << "Profile Manager CLI" << std::endl;
+    ProfileStore store;
+
+    Menu menu(store);
+    menu.run();
     return 0;
+
 }

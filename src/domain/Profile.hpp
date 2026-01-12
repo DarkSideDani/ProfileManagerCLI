@@ -19,7 +19,7 @@ class Profile{
                 int age,
                 const std::string& city,
                 const std::string& country);
-        // Ready-only accessors
+        // Read-only accessors
         // We add const to the end to imply that this method does not modify the object
         int id() const;
         const std::string& name() const;

@@ -43,7 +43,7 @@ std::string Profile::to_string() const{
         if (i + 1 < hobbies_.size()) out << ", ";
     }
     out << "\n";
-    return out.str(); // str() returns the accumulated contents of the stream as an std::string
+    return out.str(); // str() returns the accumulated contents of the stream as a std::string
 }
 
 
