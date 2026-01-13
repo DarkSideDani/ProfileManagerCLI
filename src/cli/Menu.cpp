@@ -1,6 +1,7 @@
 #include "Menu.hpp"
 #include <iostream>
 #include <limits> // needed to discard input safely std::numeric_limits<std::streamsize>::max()
+#include "../persistence/ProfileSerializer.hpp"
 
 // Menu: input/output + command loop (no business logic)
 
@@ -17,6 +18,8 @@ void Menu::run()
                   << "4) Delete profile\n"
                   << "5) Add hobby\n"
                   << "6) Remove hobby\n"
+                  << "7) Save to file\n"
+                  << "8) Load from file\n"
                   << "0) Exit\n";
         int choice = read_int("Select option: ");
 
@@ -27,6 +30,8 @@ void Menu::run()
             case 4: delete_profile(); break;
             case 5: add_hobby(); break;
             case 6: remove_hobby(); break;
+            case 7: save_to_file(); break;
+            case 8: load_from_file(); break;
             case 0:
                 std::cout << "Goodbye.\n";
                 return;
@@ -156,4 +161,28 @@ std::string Menu::read_line(const char* prompt)
     std::string line;
     std::getline(std::cin, line);
     return line;
+}
+
+void Menu::save_to_file()
+{
+    std::string path = read_line("Enter file path to save (ex: profiles.txt) ");
+    if (ProfileSerializer::save(store_, path))
+    {
+        std::cout << "Saved to " << path << "\n";
+    } else
+    {
+        std::cout << "Failed to save to " << path << "\n";
+    }
+}
+
+void Menu::load_from_file()
+{
+    std::string path = read_line("Enter file path to load (ex: profiles.txt) ");
+    if (ProfileSerializer::load(store_, path))
+    {
+        std::cout << "Loaded from " << path << "\n";
+    } else
+    {
+        std::cout << "Failed to load from " << path << " (missing file or invalid format) \n";
+    }
 }

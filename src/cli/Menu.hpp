@@ -23,6 +23,8 @@ private:
     void delete_profile();
     void add_hobby();
     void remove_hobby();
+    void save_to_file();
+    void load_from_file();
 
     // Input helpers
     int read_int(const char* prompt);

@@ -56,3 +56,24 @@ std::size_t ProfileStore::size() const
 {
     return profiles_.size(); // cheap O(1) query
 }
+
+void ProfileStore::clear()
+{
+    profiles_.clear();
+    next_id_ = 1;
+}
+
+bool ProfileStore::insert_profile(const Profile& profile)
+{
+    const int id = profile.id();
+
+    // If the id already exists, reject to avoid collisions.
+    auto [it, inserted] = profiles_.emplace(id, profile);
+    if (!inserted) return false;
+
+    // Ensure next_id_ will never reuse an existing id.
+    if (id >= next_id_) {
+        next_id_ = id + 1;
+    }
+    return true;
+}

@@ -29,6 +29,9 @@ public:
     std::vector<int> list_ids() const; // Return all ID's
     std::size_t size() const; // num of profiles stored
 
+    void clear(); // clears all stored profiles and resets id counter
+    bool insert_profile(const Profile& profile); // pre-constructed profile (e.g. from disk)
+
 };
 
 #endif //PROFILEMANAGERCLI_PROFILESTORE_HPP
