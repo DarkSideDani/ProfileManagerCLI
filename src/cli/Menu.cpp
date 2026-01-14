@@ -20,6 +20,7 @@ void Menu::run()
                   << "6) Remove hobby\n"
                   << "7) Save to file\n"
                   << "8) Load from file\n"
+                  << "9) Update profile\n"
                   << "0) Exit\n";
         int choice = read_int("Select option: ");
 
@@ -32,6 +33,7 @@ void Menu::run()
             case 6: remove_hobby(); break;
             case 7: save_to_file(); break;
             case 8: load_from_file(); break;
+            case 9: update_profile(); break;
             case 0:
                 std::cout << "Goodbye.\n";
                 return;
@@ -185,4 +187,61 @@ void Menu::load_from_file()
     {
         std::cout << "Failed to load from " << path << " (missing file or invalid format) \n";
     }
+}
+
+void Menu::update_profile()
+{
+    int id = read_int("Enter profile id to update: ");
+    Profile* p = store_.find(id);
+
+    if (!p){
+        std::cout << "No profile found with ID: " << id << ".\n";
+        return;
+    }
+
+    std::cout << "\nCurrent profile:\n" << p->to_string() << "\n";
+    std::cout << "Leave input blank and press Enter to keep the current value.\n\n";
+
+    // Strings : empty means "skip"
+    std::string new_name = read_line("New name: ");
+    if (!new_name.empty()){
+        if (!p->set_name(new_name)){
+            std::cout << "Invalid name (cannot be empty). \n";
+        }
+    }
+
+    // Age: blank means "skip", otherwise must be a valid integer
+    std::string age_line = read_line("New age: ");
+    if (!age_line.empty()){
+        try
+        {
+            int new_age = std::stoi(age_line);
+            if (!p->set_age(new_age))
+            {
+                std::cout << "Invalid age (must be 0...130).\n";
+            }
+        } catch (...)
+        {
+            std::cout << "Invalid age input (not a number). \n";
+        }
+    }
+
+    std::string new_city = read_line("New city: ");
+    if (!new_city.empty())
+    {
+        if (!p->set_city(new_city))
+        {
+            std::cout << "Invalid city (cannot be empty). \n";
+        }
+    }
+    std::string new_country = read_line("New country: ");
+    if (!new_country.empty())
+    {
+        if (!p->set_country(new_country))
+        {
+            std::cout << "Invalid country (cannot be empty). \n";
+        }
+    }
+
+    std::cout << "\nUpdated profile:\n" << p->to_string();
 }

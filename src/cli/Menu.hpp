@@ -25,6 +25,7 @@ private:
     void remove_hobby();
     void save_to_file();
     void load_from_file();
+    void update_profile();
 
     // Input helpers
     int read_int(const char* prompt);

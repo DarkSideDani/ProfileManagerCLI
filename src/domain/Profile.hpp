@@ -31,8 +31,12 @@ class Profile{
         //Mutators
         void add_hobby(const std::string& hobby);
         bool remove_hobby(const std::string& hobby);
+        bool set_name(const std::string& name);
+        bool set_age(int age);
+        bool set_city(const std::string& city);
+        bool set_country(const std::string& country);
 
-        std::string to_string() const; // presentation
+    std::string to_string() const; // presentation
 
 };
 

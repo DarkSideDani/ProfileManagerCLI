@@ -46,4 +46,31 @@ std::string Profile::to_string() const{
     return out.str(); // str() returns the accumulated contents of the stream as a std::string
 }
 
+// bool return so that UI can report validation failures instead of silently accepting bad values.
+bool Profile::set_name(const std::string& name)
+{
+    if (name.empty()) return false;
+    name_ = name;
+    return true;
+}
 
+bool Profile::set_age(int age)
+{
+    if (age < 0 || age > 130) return false;
+    age_ = age;
+    return true;
+}
+
+bool Profile::set_city(const std::string& city)
+{
+    if (city.empty()) return false;
+    city_ = city;
+    return true;
+}
+
+bool Profile::set_country(const std::string& country)
+{
+    if (country.empty()) return false;
+    country_ = country;
+    return true;
+}

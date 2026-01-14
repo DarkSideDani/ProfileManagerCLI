@@ -24,7 +24,7 @@ public:
     const Profile* find(int id) const;
 
     // Remove profile by ID. True if removed / False if not found
-    bool remove(int ind);
+    bool remove(int id);
 
     std::vector<int> list_ids() const; // Return all ID's
     std::size_t size() const; // num of profiles stored
