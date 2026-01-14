@@ -14,6 +14,7 @@ The application allows you to:
 5. Add and remove hobbies
 6. Save profiles to disk
 7. Load profiles from disk
+8. Update profiles
 
 Profiles and hobbies are persisted using a custom, delimiter-safe text format.
 
